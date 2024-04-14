@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "mysql2": "^3.9.4"
+  },
+  "name": "moviedb",
+  "description": "En databas för registrar vilka filmer man har titat på",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "(src/main.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugojoensson/MovieDb.git"
+  },
+  "author": "Hugo Joensson",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hugojoensson/MovieDb/issues"
+  },
+  "homepage": "https://github.com/hugojoensson/MovieDb#readme"
+}

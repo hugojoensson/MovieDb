@@ -1,0 +1,4 @@
+DROP DATABASE movie;
+CREATE DATABASE movie;
+USE movie
+
