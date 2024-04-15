@@ -2,6 +2,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
+    "mysql-promise": "^5.0.0",
     "mysql2": "^3.9.4"
   },
   "name": "moviedb",

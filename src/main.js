@@ -5,11 +5,11 @@ import fs from "fs-extra";
 async function main() {
     try {
         const db = await mysql.createConnection({
-            host     : 'localhost',
-            user     : 'admin',
-            password : 'Pik12',
-            database : 'movie'
-          });
+            "host"     : '127.0.0.1',
+            "user"     : 'admin',
+            "password" : 'Pik12',
+            "database" : 'movie'
+        });
       
       console.log('Anslutning till databasservern lyckades!');
   
@@ -22,7 +22,9 @@ async function main() {
   
   
       return db;
-    } catch (error) {
+    }
+    
+     catch (error) {
       console.error('Fel vid anslutning till databasservern:', error);
       throw error;
     }
