@@ -1,9 +1,15 @@
 {
   "dependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "@types/mustache": "^4.2.5",
+    "@types/uuid": "^9.0.8",
+    "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "fs-extra": "^11.2.0",
+    "mustache": "^4.2.0",
     "mysql-promise": "^5.0.0",
-    "mysql2": "^3.9.4"
+    "mysql2": "^3.9.4",
+    "uuid": "^9.0.1"
   },
   "name": "moviedb",
   "description": "En databas för registrar vilka filmer man har titat på",
