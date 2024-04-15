@@ -5,8 +5,13 @@ import crypto from 'crypto';
 import { v4 as uuid } from 'uuid';
 import cookie from "cookie-parser";
 import mustache from "mustache";
+import path from 'path';
 
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 
 
@@ -17,7 +22,6 @@ async function main() {
             "password" : 'Pik12',
             "database" : 'movie'
         });
-      
       console.log('Anslutning till databasservern lyckades!');
   
       const result = await db.execute('SELECT * FROM user;');
@@ -27,12 +31,13 @@ async function main() {
 
       app.use("/", express.static("public"));
 
-      
+      // Test exempel
       app.get("/chatt", function(req, res) {
         let msg = req.query.msg;
         console.log(msg);
       });
       
+      // Funktion för inloggning
       app.get("/login", async function(req, res) {
         if (
           req.query &&
@@ -57,7 +62,7 @@ async function main() {
 
             res.cookie("login", token, {maxAge: 10000000});
 
-            res.send("Du är inloggad!");
+            res.sendFile(path.join(__dirname, '..', 'public', 'overview.html'));
           }
            else {
             res.send("Fel lösenord!");
@@ -68,9 +73,8 @@ async function main() {
         }
      });
 
-
+     // Saker med kakor som inte fungerar
      app.use(cookie());
-
 
      app.get("/", async function(req, res) {
       let count = 0;
