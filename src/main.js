@@ -7,12 +7,17 @@ import cookie from "cookie-parser";
 import mustache from "mustache";
 import path from 'path';
 
+import login from "./login.js";
+
+
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+export const app = express();
+app.use("/", express.static("public"));
 
 
 async function main() {
@@ -29,8 +34,9 @@ async function main() {
       console.log('Resultat av frågan:', result);
 
       const app = express();
-
       app.use("/", express.static("public"));
+
+      await login(db);
 
       // Test exempel
       app.get("/chatt", function(req, res) {
@@ -58,40 +64,8 @@ async function main() {
       
 
       // Funktion för inloggning
-      app.get("/login", async function(req, res) {
-        if (
-          req.query &&
-          typeof req.query.user === "string" &&
-          typeof req.query.password === "string"
-        ) 
-        {
-          const user_name = req.query.user;
+      await login(db);
 
-          const password =
-          crypto.createHash('md5').update(String(req.query.password)).digest('hex');
-
-          let question = 'SELECT name,password FROM user WHERE name ="'+user_name+'"';
-          const user_answer = await db.execute(question);
-
-          const password_from_database = user_answer.values().next().value[0].password;
-
-          if(password_from_database === password) {
-            const token_storage = {};
-            const token = uuid();
-            token_storage[token] = user_name;
-
-            res.cookie("login", token, {maxAge: 10000000});
-
-            res.sendFile(path.join(__dirname, '..', 'public', 'overview.html'));
-          }
-           else {
-            res.send("Fel lösenord!");
-          }
-        }
-        else {
-          res.send("Du har inte skrivit in anvädnarnamn eller lösenord!");
-        }
-     });
     
      // Funktion för logga ut från översikts sidan
      app.get("/logout", async function(req, res) {
@@ -124,8 +98,7 @@ async function main() {
       app.listen(port, () => {
         console.log("You can find this server on: http://localhost:" + port);
       });
-  
-  
+
       return db;
     }
 main();
