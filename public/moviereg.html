@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Regestrera filmer</title>
+</head>
+<body>
+    <h1>Här kan du lägga till filmer och serier du har tittat på</h1>
+    <form action="/register">
+
+        <label for="m-or-s">Film eller Serie/label>
+        <button type="submit" id="movieBtn" ac>Film</button>
+        <button type="submit" id="SerieBtn" ac>Serie</button>
+
+        <label for="title">Titel</label>
+        <input type="text" id="title">
+
+        <label for="release-year">När kom filmen ut</label>
+        <input type="text" id="release-year">
+
+        <label for="watch-date">När såg du filmen</label>
+        <input type="date" id="watch-date" value="2024-04-16">
+
+        <label for="length">Hur lång var filmen</label>
+        <input type="time" id="length" value="00:00:00">
+
+        <label for="rating">recsension</label>
+        <input type="text" id="rating">
+    </form>
+</body>
+</html>

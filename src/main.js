@@ -72,6 +72,11 @@ async function main() {
           res.send("Du har inte skrivit in anvädnarnamn eller lösenord!");
         }
      });
+    
+     // Funktion för logga ut från översikts sidan
+     app.get("/logout", async function(req, res) {
+      res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+     });
 
      // Saker med kakor som inte fungerar
      app.use(cookie());
