@@ -40,23 +40,20 @@ async function main() {
 
       // Regestrera filmer
       app.get("/register", async function(req, res) {
-        console.log('Got request to register new movie');
         let title = req.query.title;
-       /* let release_year = req.query.release_year;
+        let release_year = req.query.release_year;
+        console.log(release_year);
         let watch_date = req.query.watch_date;
+        console.log(watch_date);
         let movie_length = req.query.movie_length;
+        console.log(movie_length);
         let rating = req.query.rating;
-*/
-        console.log('Title: ', title);
-  /*      console.log('Release year: ', release_year);
-        console.log('Watch date: ', watch_date);
-        console.log('Movie length: ', movie_length);
-        console.log('Rating: ', rating);
-*/
-        let question = 'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("'+title+'","'+0+'","'+0+'","'+0+'","'+0+'")';
-        console.log('Query: ', question);
+
+        let question = 'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("'+title+'","'+release_year+'","'+watch_date+'","'+movie_length+'","'+rating+'")';
         await db.execute(question);
-        console.log('Query executed');
+
+        const result = await db.execute('SELECT * FROM movie;');
+        console.log('Resultat av frågan:', result);
       })
       
 

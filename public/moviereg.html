@@ -11,28 +11,29 @@
         <label for="m-or-s">Film eller Serie/label>
         <button type="" id="movieBtn" ac>Film</button>
         <button type="submit" id="SerieBtn" ac>Serie</button>
-        -->        
+        --> 
+
         <label for="title">Titel</label>
-        <input type="text" id="title">
-<!--
+        <input type="text" name="title">
+
         <label for="release-year">När kom filmen ut</label>
-        <input type="text" id="release-year">
+        <input type="number" min="1900" max="2025" step="1" value="2024" name="release_year">
 
         <label for="watch-date">När såg du filmen</label>
-        <input type="date" id="watch-date" value="2024-04-16">
+        <input type="date" name="watch_date" value="2024-04-16">
 
         <label for="length">Hur lång var filmen</label>
-        <input type="time" id="movie-length" value="00:00:00">
+        <input type="time" name="movie_length">
 
         <label for="rating">recsension</label>
-        <input type="text" id="rating">
-    -->
+        <input type="number" min="1" max="10" step="1" name="rating">
         <button type="submit">Registrera</button>
     </form>
 
 
     <form action="/chatt">
-        <input type="text" id="msg">
+        <input type="text" name="msg" value="msg">
+        <button type="submit">Skicka</button>
     </form>
 </body>
 </html>

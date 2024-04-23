@@ -15,8 +15,8 @@ CREATE TABLE movie (
 id INT NOT NULL AUTO_INCREMENT,
 PRIMARY KEY (id),
 title varchar(255),
-release_year int,
-watch_date int,
-movie_length int,
+release_year YEAR,
+watch_date DATE,
+movie_length TIME,
 rating int
 );
