@@ -6,6 +6,14 @@ import mustache from "mustache";
 import path from 'path';
 
 import login from "./login.js";
+import movieReg from "./register.js";
+import movieLib from "./showMovieLib.js";
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const app = express();
 app.use("/", express.static("public"));
@@ -27,6 +35,7 @@ async function main() {
       const app = express();
       app.use("/", express.static("public"));
 
+      // Funktion för inloggning
       app.get("/login", login(db));
 
 
@@ -37,30 +46,34 @@ async function main() {
       });
 
       // Regestrera filmer
-      app.get("/register", async function(req, res) {
-        let title = req.query.title;
-        let release_year = req.query.release_year;
-        console.log(release_year);
-        let watch_date = req.query.watch_date;
-        console.log(watch_date);
-        let movie_length = req.query.movie_length;
-        console.log(movie_length);
-        let rating = req.query.rating;
-
-        let question = 'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("'+title+'","'+release_year+'","'+watch_date+'","'+movie_length+'","'+rating+'")';
-        await db.execute(question);
-
-        const result = await db.execute('SELECT * FROM movie;');
-        console.log('Resultat av frågan:', result);
-      })
-      
-
-      // Funktion för inloggning
+      app.get("/register", movieReg(db));
     
      // Funktion för logga ut från översikts sidan
      app.get("/logout", async function(req, res) {
       res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
      });
+
+     // Skapa en middelwer som bara tillåter inloggade personer
+      /*function isLoggedIn(req, res, next) {
+      let token = req.cookies.login??"";
+      let user = token_storage[token];
+    
+      if(user) {
+        next()
+        console.log("Allowed");
+      }
+      
+      else {
+        res.status(401).send("Not allowed");
+        console.error("Not allowed");
+      }
+      }
+      app.use("/secret/", isLoggedIn);
+
+      app.get("/secret/test", function (req, res) {
+        res.send("Hello World!");
+      });
+*/
 
      // Saker med kakor som inte fungerar
      app.use(cookie());
