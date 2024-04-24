@@ -1,20 +1,11 @@
 import express from "express";
 import mysql from "mysql2/promise";
 import fs from "fs-extra";
-import crypto from 'crypto';
-import { v4 as uuid } from 'uuid';
 import cookie from "cookie-parser";
 import mustache from "mustache";
 import path from 'path';
 
 import login from "./login.js";
-
-
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 export const app = express();
 app.use("/", express.static("public"));
@@ -36,7 +27,8 @@ async function main() {
       const app = express();
       app.use("/", express.static("public"));
 
-      await login(db);
+      app.get("/login", login(db));
+
 
       // Test exempel
       app.get("/chatt", function(req, res) {
@@ -64,8 +56,6 @@ async function main() {
       
 
       // Funktion för inloggning
-      await login(db);
-
     
      // Funktion för logga ut från översikts sidan
      app.get("/logout", async function(req, res) {
