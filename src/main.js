@@ -7,10 +7,10 @@ import path from 'path';
 
 import login from "./login.js";
 import movieReg from "./register.js";
+import movieLib from "./showMovieLib.js";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { watch } from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,6 +27,10 @@ async function main() {
             "database" : 'movie'
         });
       console.log('Anslutning till databasservern lyckades!');
+      
+      // test
+      const result = await db.execute('SELECT * FROM user;');
+      console.log('Resultat av frågan:', result);
 
       const app = express();
       app.use("/", express.static("public"));
@@ -34,9 +38,16 @@ async function main() {
       // Funktion för inloggning
       app.get("/login", login(db));
 
+
+      // Test exempel
+      app.get("/chatt", function(req, res) {
+        let msg = req.query.msg;
+        console.log(msg);
+      });
+
       // Regestrera filmer
       app.get("/register", movieReg(db));
-
+    
      // Funktion för logga ut från översikts sidan
      app.get("/logout", async function(req, res) {
       res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
