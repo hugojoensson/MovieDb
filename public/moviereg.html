@@ -3,6 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Regestrera filmer</title>
+    <style>
+        
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h1 {
+    color: #ffcc00;
+    margin-top: 50px;
+}
+
+form {
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    color: #a0a0a0;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+    padding: 10px;
+    margin-top: 10px;
+    width: 200px;
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+    background-color: #333333;
+    color: #ffffff;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #ffcc00;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffa500;
+}
+    </style>
 </head>
 <body>
     <h1>Här kan du lägga till filmer och serier du har tittat på</h1>
@@ -10,17 +64,18 @@
         <label for="title">Titel</label>
         <input type="text" name="title">
 
-        <label for="release-year">När kom filmen ut</label>
+        <label for="release-year">När publicerades filmen</label>
         <input type="number" min="1900" max="2025" step="1" value="2024" name="release_year">
 
         <label for="watch-date">När såg du filmen</label>
         <input type="date" name="watch_date" value="2024-04-16">
 
         <label for="length">Hur lång var filmen</label>
-        <input type="time" name="movie_length">
+        <input type="time" name="movie_length" value="01:00">
 
-        <label for="rating">recsension</label>
+        <label for="rating">Betyg</label>
         <input type="number" min="1" max="10" step="1" name="rating">
+        <br>
         <button type="submit">Registrera</button>
     </form>
 </body>

@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Overview</title>
-</head>
-<body>
-    <li>
-        <ul><a href="moviereg.html">Regestrera filmer och serier som du har sett</a></ul>
-        <ul><a href="/lib">Ditt biblotek</a></ul>
-        <ul><a href="/logout">Logg ut</a></ul>
-    </li>
-</body>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      h1 {
+        color: #ffcc00;
+        margin-top: 50px;
+      }
+
+      h2 {
+        color: #a0a0a0;
+      }
+
+      button {
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #ffcc00;
+        color: #121212;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #ffa500;
+      }
+
+      a {
+        text-decoration: none;
+        color: #121212;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Välkommen till MovieDb!</h1>
+    <h2>En databas för regestrera din tittade filmer</h2>
+    <br />
+    <button><a href="moviereg.html">Regestrera filmer</a></button>
+    <br />
+    <button><a href="/lib">Ditt biblotek</a></button>
+    <br />
+    <button><a href="/logout">Logg ut</a></button>
+  </body>
 </html>

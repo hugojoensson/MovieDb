@@ -66,11 +66,18 @@ async function main() {
 
      // Saker med kakor som inte fungerar
      app.use(cookie());
+     
+      app.get("/test", async function(req, res) {
+        let count = 11;
+        res.cookie("count", count, {maxAge: 100000000});
+        count = count + 1;
+        res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+      })
 
      app.get("/", async function(req, res) {
       let count = 0;
-  
-      if(req.cookies.count === undefined) {
+      
+      if(req.cookies.count == undefined) {
           res.cookie("count", 0, {maxAge: 100000000});
       } else {
           count = Number(req.cookies.count);
