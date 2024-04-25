@@ -8,5 +8,10 @@ export default function movieReg(db) {
 
     let question = 'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("'+title+'","'+release_year+'","'+watch_date+'","'+movie_length+'","'+rating+'")';
     await db.execute(question);
+
+    let question2 ='SELECT * FROM movie';
+    let answer = await db.execute(question);
+
+    res.send("Filmen har lagts till:" + answer);
   };
 }
