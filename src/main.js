@@ -7,7 +7,7 @@ import path from 'path';
 
 import login from "./login.js";
 import movieReg from "./register.js";
-// import movieLib from "./showMovieLib.js";
+import movieLib from "./showMovieLib.js";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
