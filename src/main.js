@@ -42,11 +42,34 @@ async function main() {
       res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
      });
 
+     app.use(cookie());
      // Skapa en middelwer som bara tillåter inloggade personer
-      /*function isLoggedIn(req, res, next) {
+     function isLoggedIn(req, res, next) {
       let token = req.cookies.login??"";
+      console.log(token);
+      //let user = token_storage[token];
+      // console.log(user);
+
+      if(user) {
+        next()
+      }
+      else {
+        res.status(401).send("Not allowed");
+        console.error("Not allowed");
+      }
+      }
+      app.use("/secret/", isLoggedIn);
+
+      app.get("/secret/test", function (req, res) {
+        res.send("Hello World!");
+      });
+
+/*
+      function isLoggedIn(req, res, next, db) {
+      let token = req.cookies.login??"";
+      console.log(token);
       let user = token_storage[token];
-    
+      console.log(user);    
       if(user) {
         next()
         console.log("Allowed");
@@ -63,21 +86,13 @@ async function main() {
         res.send("Hello World!");
       });
 */
+     // Saker med kakor
 
-     // Saker med kakor som inte fungerar
-     app.use(cookie());
      
-      app.get("/test", async function(req, res) {
-        let count = 11;
-        res.cookie("count", count, {maxAge: 100000000});
-        count = count + 1;
-        res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
-      })
-
-     app.get("/", async function(req, res) {
+     app.get("/tryck", async function(req, res) {
       let count = 0;
       
-      if(req.cookies.count == undefined) {
+      if(req.cookies.count === undefined) {
           res.cookie("count", 0, {maxAge: 100000000});
       } else {
           count = Number(req.cookies.count);

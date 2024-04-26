@@ -26,7 +26,7 @@
         color: #a0a0a0;
       }
 
-      a {
+      a, button {
         display: inline-block;
         margin-top: 20px;
         padding: 10px 20px;
@@ -51,7 +51,10 @@
       <h1>Välkommen till MovieDb!</h1>
       <h2>En databas för regestrera dina tittade filmer och serier</h2>
       <a href="login.html">Logga in</a>
-      <h3>Du har besökt sidan {{count}}!</h3>
+      <form action="/tryck" method="get">
+        <button type="submit">Tryck</button>
+      </form>
+      <h3>Du har tryckt {{count}}!</h3>
     </div>
   </body>
 </html>
