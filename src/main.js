@@ -7,6 +7,7 @@ import path from 'path';
 
 import login from "./login.js";
 import movieReg from "./register.js";
+import userReg from "./registerUser.js";
 // import movieLib from "./showMovieLib.js";
 
 import { fileURLToPath } from "url";
@@ -33,6 +34,9 @@ async function main() {
 
       // Funktion för inloggning
       app.get("/login", login(db));
+
+      // Funktion för registrering
+      app.get("/registerUserSite", userReg(db));
 
       // Regestrera filmer
       app.get("/register", movieReg(db));

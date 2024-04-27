@@ -33,7 +33,7 @@ export default function login(db) {
         const token_storage = {};
         const token = uuid();
         token_storage[token] = user_name;
-
+        console.log(token_storage);
         res.cookie("login", token, { maxAge: 10000000 });
 
         res.sendFile(path.join(__dirname, "..", "public", "overview.html"));
