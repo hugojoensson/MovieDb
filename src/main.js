@@ -8,7 +8,7 @@ import path from 'path';
 import login from "./login.js";
 import movieReg from "./register.js";
 import userReg from "./registerUser.js";
-// import movieLib from "./showMovieLib.js";
+import movieLib from "./showMovieLib.js";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -40,6 +40,9 @@ async function main() {
 
       // Regestrera filmer
       app.get("/register", movieReg(db));
+
+      // Visa filmer
+      app.get("/library", movieLib(db));
     
      // Funktion för logga ut från översikts sidan
      app.get("/logout", async function(req, res) {
@@ -68,31 +71,7 @@ async function main() {
         res.send("Hello World!");
       });
 
-/*
-      function isLoggedIn(req, res, next, db) {
-      let token = req.cookies.login??"";
-      console.log(token);
-      let user = token_storage[token];
-      console.log(user);    
-      if(user) {
-        next()
-        console.log("Allowed");
-      }
-      
-      else {
-        res.status(401).send("Not allowed");
-        console.error("Not allowed");
-      }
-      }
-      app.use("/secret/", isLoggedIn);
-
-      app.get("/secret/test", function (req, res) {
-        res.send("Hello World!");
-      });
-*/
-     // Saker med kakor
-
-     
+     // Saker med kakor     
      app.get("/tryck", async function(req, res) {
       let count = 0;
       
