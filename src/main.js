@@ -64,11 +64,11 @@ async function main() {
   // Gå in på film registreringssidan
   app.get("/secret/registerSite", async function (req, res) {
     res.sendFile(path.join(__dirname, "..", "public", "moviereg.html"));
-  })
+  });
 
   // Funktion för logga ut från översikts sidan
   app.get("/logout", async function (req, res) {
-    res.clearCookie('login');
+    res.clearCookie("login");
 
     res.sendFile(path.join(__dirname, "..", "public", "index.html"));
   });

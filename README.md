@@ -1,2 +1,2 @@
 # MovieDb
-En databas för registrar vilka filmer man har titat på
+En databas för registra vilka filmer man har titat på
