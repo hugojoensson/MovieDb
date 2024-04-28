@@ -31,32 +31,16 @@ async function main() {
   const app = express();
   app.use("/", express.static("public"));
 
-  // Funktion för inloggning
-  app.get("/login", login(db));
-
-  // Funktion för registrering
-  app.get("/registerUserSite", userReg(db));
-
-  // Regestrera filmer
-  app.get("/register", movieReg(db));
-
-  // Visa filmer
-  app.get("/library", movieLib(db));
-
-  // Funktion för logga ut från översikts sidan
-  app.get("/logout", async function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
-  });
-
   app.use(cookie());
+
   // Skapa en middelwer som bara tillåter inloggade personer
   function isLoggedIn(req, res, next) {
     let token = req.cookies.login ?? "";
     console.log(token);
-    //let user = token_storage[token];
+    // let user = token_storage[token];    // från var? guide: Skapa en middelwer som bara tillåter inloggade personer
     // console.log(user);
 
-    if (user) {
+    if (token) {
       next();
     } else {
       res.status(401).send("Not allowed");
@@ -65,8 +49,28 @@ async function main() {
   }
   app.use("/secret/", isLoggedIn);
 
-  app.get("/secret/test", function (req, res) {
-    res.send("Hello World!");
+  // Funktion för inloggning
+  app.get("/login", login(db));
+
+  // Funktion för registrering
+  app.get("/registerUserSite", userReg(db));
+
+  // Regestrera filmer
+  app.get("/secret/register", movieReg(db));
+
+  // Visa filmer
+  app.get("/secret/library", movieLib(db));
+
+  // Gå in på film registreringssidan
+  app.get("/secret/registerSite", async function (req, res) {
+    res.sendFile(path.join(__dirname, "..", "public", "moviereg.html"));
+  })
+
+  // Funktion för logga ut från översikts sidan
+  app.get("/logout", async function (req, res) {
+    res.clearCookie('login');
+
+    res.sendFile(path.join(__dirname, "..", "public", "index.html"));
   });
 
   // Saker med kakor
