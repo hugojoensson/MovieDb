@@ -8,6 +8,10 @@ const __dirname = dirname(__filename);
 
 export default function movieReg(db) {
   return async function (req, res) {
+    if (req.query.title === "" || req.query.rating === "") {
+      res.send("Du har inte skrivit in titel eller rating!");
+      return;
+    }
     let title = req.query.title;
     let release_year = req.query.release_year;
     let watch_date = req.query.watch_date;

@@ -8,6 +8,11 @@ const __dirname = dirname(__filename);
 
 export default function registerUser(db) {
   return async function (req, res) {
+    if (req.query && req.query.user === "" && req.query.password === "") {
+      res.send("Du har inte skrivit in anvädnarnamn eller lösenord!");
+      return;
+    }
+
     const user_name = req.query.user;
     const password = req.query.password;
 

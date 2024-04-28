@@ -26,6 +26,11 @@ export default function login(db) {
         'SELECT name,password FROM user WHERE name ="' + user_name + '"';
       const user_answer = await db.execute(question);
 
+      // Kontrollerar att användarnamnet finns
+      if (user_answer.values().next().value[0] === undefined) {
+        res.send("Användarnamnet finns ej!");
+        return;
+      }
       const password_from_database = user_answer.values().next()
         .value[0].password;
 
