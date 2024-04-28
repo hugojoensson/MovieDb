@@ -14,14 +14,20 @@ export default function movieReg(db) {
     let movie_length = req.query.movie_length;
     let rating = req.query.rating;
 
-      let question = 'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("'+title+'","'+release_year+'","'+watch_date+'","'+movie_length+'","'+rating+'")';
-      await db.execute(question);
-/*
-      const [rows] = await db.execute('SELECT * FROM movie ORDER BY id DESC LIMIT 1');
-            
-      res.send(`${rows[0].title} har lagts till från ${rows[0].release_year}`);
+    let question =
+      'INSERT INTO movie (title , release_year, watch_date, movie_length, rating) VALUES ("' +
+      title +
+      '","' +
+      release_year +
+      '","' +
+      watch_date +
+      '","' +
+      movie_length +
+      '","' +
+      rating +
+      '")';
+    await db.execute(question);
 
-*/
     res.sendFile(path.join(__dirname, "..", "public", "overview.html"));
   };
 }

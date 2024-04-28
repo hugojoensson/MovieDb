@@ -1,9 +1,8 @@
-
 export default function movieLib(db) {
   return async function (req, res) {
     let question = "SELECT * FROM movie;";
     const rows = await db.execute(question);
-    
+
     // Hämtar den id för första filmen
     const first_id = rows[0][0].id;
     console.log(first_id);
@@ -14,44 +13,40 @@ export default function movieLib(db) {
     const latest_id = latest_id_Obj[0][0].latest_id;
     console.log(latest_id);
 
-    let movieCount = latest_id - first_id
-    console.log(movieCount)
+    let movieCount = latest_id - first_id + 1;
+    console.log(movieCount);
 
-    let  allMovies = {};
+    let allMovies = {};
 
     for (let i = first_id; i < latest_id + 1; i++) {
-      console.log("id: "+ i);
+      console.log("id: " + i);
       let question3 = "SELECT * FROM movie WHERE id = " + i;
       const movie = await db.execute(question3);
 
-      let title = movie[0][0].title
+      let title = movie[0][0].title;
       console.log("title: " + title);
 
-      let release_year = movie[0][0].release_year
+      let release_year = movie[0][0].release_year;
       console.log("release_year: " + release_year);
 
-      let watch_date = movie[0][0].watch_date
+      let watch_date = movie[0][0].watch_date;
       console.log("watch_date: " + watch_date);
 
-      let movie_length = movie[0][0].movie_length
+      let movie_length = movie[0][0].movie_length;
       console.log("movie_length: " + movie_length);
 
-      let rating = movie[0][0].rating
+      let rating = movie[0][0].rating;
       console.log("rating: " + rating);
 
-      console.log("             --------                     ")
+      console.log("             --------                     ");
 
       allMovies[i] = {
         title: title,
         release_year: release_year,
         watch_date: watch_date,
         movie_length: movie_length,
-        rating: rating
+        rating: rating,
       };
-
-      //let everything =+ title + " " + release_year + " " + watch_date + " " + movie_length + " " + rating + "\n"
-      //res.send(title + " " + release_year + " " + watch_date + " " + movie_length + " " + rating);
-
     }
     let tableHTML = `
     <head>
@@ -72,7 +67,7 @@ export default function movieLib(db) {
       margin-top: 50px;
   }
   
-  h2 {
+  h2, h3 {
       color: #a0a0a0;
       margin-top: 20px;
   }
@@ -111,6 +106,7 @@ export default function movieLib(db) {
   </head>
     <h1>Bibloteket</h1>
     <h2>Här kan se vilka filmer och serier du har tittat på</h2>
+    <h3>Du har lagt til ${movieCount} filmer</h3>
     <table>
       <thead>
         <tr>
@@ -123,10 +119,10 @@ export default function movieLib(db) {
       </thead>
       <tbody>
   `;
-   // Loopa genom allMovies och lägg till varje film som en rad i tabellen
-   for (const id in allMovies) {
-    const movie = allMovies[id];
-    tableHTML += `
+    // Loopa genom allMovies och lägg till varje film som en rad i tabellen
+    for (const id in allMovies) {
+      const movie = allMovies[id];
+      tableHTML += `
       <tr>
         <td>${movie.title}</td>
         <td>${movie.release_year}</td>
@@ -135,19 +131,13 @@ export default function movieLib(db) {
         <td>${movie.rating}</td>
       </tr>
     `;
-  }
+    }
     // Avsluta HTML-strängen för tabellen
     tableHTML += `
     </tbody>
   </table>
 `;
 
-res.send(tableHTML);
-
-
-    // res.send(allMovies);
-    
-
-    // res.send(rows);
+    res.send(tableHTML);
   };
 }
